@@ -1,7 +1,7 @@
 import pickle
 import numpy as np
 import torch
-from VAE_model_up import ResidualVAE_Segmenter
+from VAE_model import ResidualVAE_Segmenter
 from tqdm import tqdm
 from math import pi
 from scipy.ndimage import label as nd_label, binary_erosion
