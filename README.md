@@ -1,2 +1,84 @@
-# Interpretable_VAE
-Interpretable VAE for Brain Tumor Segmentaion
+# VAE-based Brain Tumor Analysis Pipeline
+
+This repository contains a modular pipeline for analyzing brain tumor MRI data using a Variational Autoencoder (VAE) and downstream statistical and classification analyses. The codebase is designed for the BRATS dataset and supports end-to-end workflows from model training to latent space interpretation.
+
+## Creators
+**Akshara Satheesan Nair**, **Aran Huarte**, **Emil Rosenlund**, **Kristian Sejr Gotfredsen**, **Nina Phuong Nhi Thi Ngo**  
+Department of Electronic Systems, Aalborg University, Aalborg, Denmark  
+Emails:  
+- asathe25@student.aau.dk  
+- ahuart24@student.aau.dk  
+- erosen22@student.aau.dk  
+- kgotfr22@student.aau.dk  
+- nngo22@student.aau.dk
+
+## Features
+- **VAE Model Training:** Train a residual VAE segmenter on MRI data.
+- **Latent Vector Extraction:** Encode MRI slices into latent vectors for further analysis.
+- **Label Classification:** Classify latent vectors based on semantic labels.
+- **Gaussian Mixture Modeling:** Fit GMMs to latent vectors for semantic clustering.
+- **Critical Dimension Identification:** Identify latent dimensions most relevant to clinical labels.
+- **Latent Space Transformation:** Manipulate latent vectors to study effects on generated images.
+
+## File Overview
+- `VAE_model.py` — Defines the `ResidualVAE_Segmenter` model architecture.
+- `train.py` — Trains the VAE model on the BRATS dataset.
+- `data_utils.py` — Data loading, preprocessing, and augmentation utilities.
+- `get_latentvectors.py` — Encodes MRI slices into latent vectors using a trained VAE.
+- `classify_predictions.py` — Classifies latent vectors using clinical labels (size, position).
+- `fitting_gaussians.py` — Fits Gaussian Mixture Models (GMMs) to latent vectors.
+- `identify_critical_dims.py` — Identifies latent dimensions critical for label separation.
+- `transform_test.py` — Applies transformations in latent space and show statistics.
+- `augmentation.py` — Performs data augmentation on MRI volumes (rotation, squeeze, brightness, salt & pepper noise).
+
+## Typical Workflow
+1. **Augment Data:**
+   ```bash
+   python augmentation.py
+   ```
+2. **Train the VAE:**
+   ```bash
+   python train.py
+   ```
+3. **Extract Latent Vectors:**
+   ```bash
+   python get_latentvectors.py
+   ```
+4. **Classify Latent Vectors:**
+   ```bash
+   python classify_predictions.py
+   ```
+5. **Fit GMMs:**
+   ```bash
+   python fitting_gaussians.py
+   ```
+6. **Identify Critical Latent Dimensions:**
+   ```bash
+   python identify_critical_dims.py
+   ```
+7. **Transform and Visualize:**
+   ```bash
+   python transform_test.py
+   ```
+
+## Data & Model Requirements
+- **Dataset:** The code expects the BRATS dataset in NIfTI format.
+- **Labels:** Tumor size and position labels should be available or generated as described in the scripts.
+- **Model Checkpoints:** Trained VAE model weights are required for encoding and transformation steps.
+
+## Environment
+- Python 3.8+
+- PyTorch
+- Numpy, Scikit-learn, Matplotlib, and other standard scientific libraries
+
+Install dependencies with:
+```bash
+pip install torch numpy scikit-learn matplotlib nibabel
+```
+
+## Notes
+- All scripts are designed to be modular and can be run independently.
+- File paths for data, models, and outputs may need to be adjusted to your environment.
+- GPU acceleration is supported and automatically detected.
+
+
