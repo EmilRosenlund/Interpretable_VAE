@@ -18,30 +18,35 @@ This repository contains a modular pipeline for analyzing brain tumor MRI data u
 - `classify_predictions.py` — Classifies latent vectors using clinical labels (size, position).
 - `fitting_gaussians.py` — Fits Gaussian Mixture Models (GMMs) to latent vectors.
 - `identify_critical_dims.py` — Identifies latent dimensions critical for label separation.
-- `transform_test.py` — Applies transformations in latent space and visualizes effects.
+- `transform_test.py` — Applies transformations in latent space and show statistics.
+- `augmentation.py` — Performs data augmentation on MRI volumes (rotation, squeeze, brightness, salt & pepper noise).
 
 ## Typical Workflow
-1. **Train the VAE:**
+1. **Augment Data:**
+   ```bash
+   python augmentation.py
+   ```
+2. **Train the VAE:**
    ```bash
    python train.py
    ```
-2. **Extract Latent Vectors:**
+3. **Extract Latent Vectors:**
    ```bash
    python get_latentvectors.py
    ```
-3. **Classify Latent Vectors:**
+4. **Classify Latent Vectors:**
    ```bash
    python classify_predictions.py
    ```
-4. **Fit GMMs:**
+5. **Fit GMMs:**
    ```bash
    python fitting_gaussians.py
    ```
-5. **Identify Critical Latent Dimensions:**
+6. **Identify Critical Latent Dimensions:**
    ```bash
    python identify_critical_dims.py
    ```
-6. **Transform and Visualize:**
+7. **Transform and Visualize:**
    ```bash
    python transform_test.py
    ```
@@ -66,9 +71,4 @@ pip install torch numpy scikit-learn matplotlib nibabel
 - File paths for data, models, and outputs may need to be adjusted to your environment.
 - GPU acceleration is supported and automatically detected.
 
-## Citation
-If you use this codebase in your research, please cite the original BRATS dataset and any relevant VAE or GMM literature.
 
----
-
-For questions or contributions, please open an issue or pull request.
